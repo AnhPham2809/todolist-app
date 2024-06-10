@@ -1,52 +1,38 @@
-import React, {useState} from 'react'
-import { ToDoForm } from './ToDoForm'
-import { ToDo } from './Todo';
-import {v4 as uuidv4} from 'uuid'; //Following tutorial
-import { ToDoFormEdit } from './ToDoFormEdit';
-
-uuidv4();
+import React, { useState } from "react";
+import { ToDo } from "./Todo";
+import ToDoInput from "./ToDoInput";
 
 export const ToDoWrapper = () => {
   const [toDos, setToDos] = useState([]);
 
-  const addToDo = toDo =>{
-    setToDos([...toDos, {id:uuidv4(),
-       task: toDo, 
-       completed: false, 
-       isEditing:false}])
-       console.log(toDos);
-  }
+  const addToDo = (newTask) => {
+    setToDos([...toDos, newTask]);
+    // IMPROVEMENT: remove all the console.log when you commit code
+  };
 
-  const toggleComplete = id => {
-    setToDos(toDos.map(todo => todo.id === id ? {...todo, completed: !todo.completed} : todo))
-  }
+  const deleteToDo = (task) => {
+    setToDos(toDos.filter((todo) => todo.id !== task.id));
+  };
 
-const deleteToDo = id => {
-  setToDos(toDos.filter(todo => todo.id !== id))
-}
-
-const editToDo = id => {
-  setToDos(toDos.map(todo => todo.id === id ? {...todo, isEditing: !todo.isEditing}: todo))
-}
-
-const editTask = (task, id) => {
-  setToDos(toDos.map(todo => todo.id ===id ? {...todo, task, isEditing: !todo.isEditing} : todo))
-}
+  // IMPROVEMENT: editToDo, editTask, toggleComplete are essentially the same edit function
+  const editToDo = (editedTask) => {
+    const newTasks = toDos.map((todo) =>
+      todo.id === editedTask.id ? editedTask : todo
+    );
+    setToDos(newTasks);
+  };
 
   return (
-    <div className='ToDoWrapper'>
+    <div className="ToDoWrapper">
       <h1> The To Do List!</h1>
-      <ToDoForm addToDo ={addToDo}/>
-      {toDos.map((todo, index) => (
+      <ToDoInput addToDo={addToDo} />
+      {toDos.map((todo) =>
         todo.isEditing ? (
-<ToDoFormEdit editToDo={editTask} task ={todo}/>
-        ) :
-        <ToDo task={todo} key={index} 
-        toggleComplete={toggleComplete}
-        deleteToDo = {deleteToDo}
-        editToDo={editToDo}
-        />
-      ))}
+          <ToDoInput mode="edit" editToDo={editToDo} task={todo} />
+        ) : (
+          <ToDo task={todo} deleteToDo={deleteToDo} editToDo={editToDo} />
+        )
+      )}
     </div>
-  )
-}
+  );
+};

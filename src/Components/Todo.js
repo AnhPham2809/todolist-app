@@ -1,21 +1,33 @@
-import React from 'react'
+import React from "react";
 
+export const ToDo = ({ task, deleteToDo, editToDo }) => {
+  const changeComplete = () => {
+    editToDo({ ...task, completed: !task.completed });
+  };
 
-export const ToDo = ({task, toggleComplete, deleteToDo, editToDo}) => {
+  const changeToDo = () => {
+    editToDo({ ...task, isEditing: !task.isEditing });
+  };
+
   return (
-    <div class='ToDo'>
-      <p 
-      onClick={() => toggleComplete(task.id)}
-      className={`${task.completed ? 'completed': ""}`}>{task.task}</p>
+    <div class="ToDo">
+      <p
+        onClick={changeComplete}
+        className={`${task.completed ? "completed" : ""}`}
+      >
+        {task.task}
+      </p>
       <div>
-     <button className='todo-button'
-     onClick={() => editToDo(task.id)}
-     >Edit</button>
-     <button className='todo-button' 
-     onClick={() => deleteToDo(task.id)} //Link to Delete ToDo , if click deleted the task with the ID
-     >Delete</button>
+        <button className="todo-button" onClick={changeToDo}>
+          Edit
+        </button>
+        <button
+          className="todo-button"
+          onClick={() => deleteToDo(task)} //Link to Delete ToDo , if click deleted the task with the ID
+        >
+          Delete
+        </button>
       </div>
-
     </div>
-  )
-}
+  );
+};
