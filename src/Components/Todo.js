@@ -16,11 +16,13 @@ export const ToDo = ({ task, deleteToDo, editToDo }) => {
         className={`${task.completed ? "completed" : ""}`}
       >
         {task.task}
+        <span> (Due: {task.dueDate})</span>
       </p>
       <div>
         <button className="todo-button" onClick={changeToDo}>
           Edit
         </button>
+        <br></br>
         <button
           className="todo-button"
           onClick={() => deleteToDo(task)} //Link to Delete ToDo , if click deleted the task with the ID

@@ -23,7 +23,7 @@ h1 {
 }
 
 .ToDoWrapper {
-  background: #1a1a40;
+  background: #ffaf47;
   margin-top: 5rem;
   padding: 2rem;
   border-radius: 5px;
@@ -37,7 +37,7 @@ h1 {
 .todo-input {
   outline: none;
   background: none;
-  border: 1px solid #0059ff;
+  border: 1px solid #33f8ff;
   padding: 0.5rem 1rem;
   margin-top: 1rem;
   margin-bottom: 2rem;
@@ -46,11 +46,11 @@ h1 {
 }
 
 .todo-input::placeholder {
-  color: #ffffff4d;
+  color: white;
 }
 
 .todo-button {
-  background: #0059ff;
+  background: #0043be;
   color: #fff;
   border: none;
   padding: 0.55rem;
@@ -66,6 +66,7 @@ h1 {
   padding: 0.75rem 1rem;
   border-radius: 5px;
   margin-bottom: 1rem;
+  cursor:pointer;
 }
 
 .fa-trash {
